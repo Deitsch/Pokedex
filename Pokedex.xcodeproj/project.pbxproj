@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		895193F6276B733100588142 /* PokeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 895193F5276B733100588142 /* PokeAPI */; };
 		896317A1276A5B9A0075B64D /* PokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896317A0276A5B9A0075B64D /* PokedexApp.swift */; };
 		896317A3276A5B9A0075B64D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896317A2276A5B9A0075B64D /* MainView.swift */; };
 		896317A5276A5B9C0075B64D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896317A4276A5B9C0075B64D /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895193F6276B733100588142 /* PokeAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +162,9 @@
 			dependencies = (
 			);
 			name = Pokedex;
+			packageProductDependencies = (
+				895193F5276B733100588142 /* PokeAPI */,
+			);
 			productName = Pokedex;
 			productReference = 8963179D276A5B9A0075B64D /* Pokedex.app */;
 			productType = "com.apple.product-type.application";
@@ -232,6 +237,9 @@
 				Base,
 			);
 			mainGroup = 89631794276A5B9A0075B64D;
+			packageReferences = (
+				895193F4276B733100588142 /* XCRemoteSwiftPackageReference "PokeAPI" */,
+			);
 			productRefGroup = 8963179E276A5B9A0075B64D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -625,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		895193F4276B733100588142 /* XCRemoteSwiftPackageReference "PokeAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Deitsch/PokeAPI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		895193F5276B733100588142 /* PokeAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 895193F4276B733100588142 /* XCRemoteSwiftPackageReference "PokeAPI" */;
+			productName = PokeAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		896317AB276A5B9C0075B64D /* Pokedex.xcdatamodeld */ = {

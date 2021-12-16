@@ -10,6 +10,10 @@ import CoreData
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    init() {
+        
+    }
 
     var body: some View {
         TabView {
