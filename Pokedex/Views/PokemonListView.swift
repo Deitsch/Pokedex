@@ -13,19 +13,26 @@ import PokeAPI
 struct PokemonListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.api) private var api
-
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \PokemonInfo.name, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<PokemonInfo>
-    @State private var cancelables: [AnyCancellable] = []
-
+      sortDescriptors: [
+        NSSortDescriptor(keyPath: \PokemonInfo.id, ascending: true)
+      ],
+      animation: .default)
+    private var pokemon: FetchedResults<PokemonInfo>
+    
     var body: some View {
-        Text("Pokemon List View").onAppear(perform: {
-            api.loadPokemon().sink(receiveCompletion: {_ in }, receiveValue: { value in
-                print(value)
-            }).store(in: &cancelables)
+        List(pokemon) { p in
+            Text(p.label)
+        }.onAppear(perform: {
+            api.loadPokemon()
         })
+    }
+}
+
+private extension PokemonInfo {
+    var label: String {
+        return (name ?? "") + " (\(id))"
     }
 }
 

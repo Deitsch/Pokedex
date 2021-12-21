@@ -9,28 +9,28 @@ import SwiftUI
 import PokeAPI
 
 // Create an environment key
-private struct PokeAPIKey: EnvironmentKey {
-    static let defaultValue: PokeAPI = PokeAPI()
+private struct PokedexAPIKey: EnvironmentKey {
+    static let defaultValue: PokedexAPI = PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext)
 }
 
 // ## Introduce new value to EnvironmentValues
 extension EnvironmentValues {
-    var api: PokeAPI {
-        get { self[PokeAPIKey.self] }
-        set { self[PokeAPIKey.self] = newValue }
+    var api: PokedexAPI {
+        get { self[PokedexAPIKey.self] }
+        set { self[PokedexAPIKey.self] = newValue }
     }
 }
 
 @main
 struct PokedexApp: App {
     let persistenceController = PersistenceController.shared
-    let pokeAPI = PokeAPI()
+    let pokedexAPI = PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext)
 
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environment(\.api, pokeAPI)
+                .environment(\.api, pokedexAPI)
         }
     }
 }
