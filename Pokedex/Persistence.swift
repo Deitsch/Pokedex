@@ -15,8 +15,8 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for i in 0..<10 {
             let newPokemon = PokemonInfo(context: viewContext)
-            newPokemon.id = Int32(i)
-            newPokemon.name = "Pokemon\(i)"
+//            newPokemon.id = Int32(i)
+//            newPokemon.name = "Pokemon\(i)"
         }
         do {
             try viewContext.save()
@@ -28,6 +28,15 @@ struct PersistenceController {
         }
         return result
     }()
+    
+    static var previewPokemon: [PokemonInfo] {
+        let context = PersistenceController.preview.container.viewContext
+
+        let fetchPokemonInfo: NSFetchRequest<PokemonInfo> = PokemonInfo.fetchRequest()
+        let results = try! context.fetch(fetchPokemonInfo)
+
+        return results
+    }
 
     let container: NSPersistentContainer
 

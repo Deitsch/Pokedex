@@ -22,17 +22,36 @@ struct PokemonListView: View {
     private var pokemon: FetchedResults<PokemonInfo>
     
     var body: some View {
-        List(pokemon) { p in
-            Text(p.label)
+        NavigationView {
+            List(pokemon) { p in
+                NavigationLink(destination: PokemonDetailView(pokemon: p)) {
+                    PokemonListRow(pokemon: p)
+                }
+            }
         }.onAppear(perform: {
             api.loadPokemon()
         })
     }
 }
 
+extension PokemonInfo: PokemonListRowModel {
+    var rowId: Int {
+        return Int(id)
+    }
+    
+    var rowName: String {
+        return name ?? ""
+    }
+    
+    var rowSpriteURL: String {
+        return spriteURL ?? ""
+    }
+    
+}
+
 private extension PokemonInfo {
     var label: String {
-        return (name ?? "") + " (\(id))"
+        return (name ?? "") + " #\(id)"
     }
 }
 
