@@ -34,21 +34,6 @@ struct PokemonListView: View {
     }
 }
 
-extension PokemonInfo: PokemonListRowModel {
-    var rowId: Int {
-        return Int(id)
-    }
-    
-    var rowName: String {
-        return name ?? ""
-    }
-    
-    var rowSpriteURL: String {
-        return spriteURL ?? ""
-    }
-    
-}
-
 private extension PokemonInfo {
     var label: String {
         return (name ?? "") + " #\(id)"

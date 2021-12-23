@@ -14,16 +14,34 @@ protocol PokemonListRowModel {
     var rowSpriteURL: String { get }
 }
 
+extension PokemonInfo: PokemonListRowModel {
+    var rowId: Int {
+        return Int(id)
+    }
+    
+    var rowName: String {
+        return name ?? ""
+    }
+    
+    var rowSpriteURL: String {
+        return spriteURL ?? ""
+    }
+    
+}
+
 struct PokemonListRow: View {
     @State var pokemon: PokemonListRowModel
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: pokemon.rowSpriteURL))
-                .frame(width: 50, height: 50)
             Text("#\(pokemon.rowId)")
             Text(pokemon.rowName)
-
+            AsyncImage(url: URL(string: pokemon.rowSpriteURL)) { image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(width: 50, height: 50)
             Spacer()
         }
     }
