@@ -29,7 +29,9 @@ struct LoginView: View {
                             TextField("", text: $password)
                                 .foregroundColor(.red)
                                 .placeholder("Password", color: .red, when: password.isEmpty)
-                        }.padding(40)
+                        }
+                        .padding(40)
+                        .font8bit(size: 16)
                     }
                     .overlay(alignment: .top) {
                         HStack {
@@ -71,8 +73,6 @@ struct LoginView: View {
                         .offset(x: 40, y: 10)
                     }
             }
-            Text("David")
-                .font(Font.custom("Connection", size: 32, relativeTo: .title))
             Spacer()
         }.padding(20)
     }
