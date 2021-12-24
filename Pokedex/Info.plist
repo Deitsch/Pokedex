@@ -7,5 +7,12 @@
 		<string>Connection.otf</string>
 		<string>ConnectionBold.otf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>p-red</string>
+		<key>UIImageName</key>
+		<string>pokedex</string>
+	</dict>
 </dict>
 </plist>

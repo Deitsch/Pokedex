@@ -10,4 +10,5 @@ import SwiftUI
 extension Color {
     static let pokemonLightGray = Color("p-lightgray")
     static let pokemonDarkGray = Color("p-darkgray")
+    static let pokemonRed = Color("p-red")
 }

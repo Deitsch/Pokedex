@@ -76,8 +76,33 @@ struct LoginView: View {
                         .offset(x: 40, y: 10)
                     }
             }
+            HStack() {
+                Button(action: {
+                    print("Round Action")
+                    }) {
+                    Image(systemName: "arrow.right.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(Color.pokemonDarkGray)
+                        .background(Color.pokemonLightGray)
+                        .clipShape(Circle())
+                }
+            }
+            .offset(y: 20)
             Spacer()
-        }.padding(padding)
+            HStack(spacing: 30) {
+                Rectangle()
+                    .fill(.green)
+                    .frame(width: 40, height: 6)
+                    .cornerRadius(20)
+                Rectangle()
+                    .fill(.blue)
+                    .frame(width: 40, height: 6)
+                    .cornerRadius(20)
+            }
+        }
+        .padding(padding)
+        .background(Color.pokemonRed)
     }
 }
 
