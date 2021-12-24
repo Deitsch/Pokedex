@@ -11,16 +11,25 @@ struct LoginView: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
+    
+    let screenHeight: CGFloat = 320
+    let padding: CGFloat = 20
+    let bottomExtraSpace: CGFloat = 20
 
     var body: some View {
         VStack {
             Spacer()
             ZStack() {
                 Rectangle()
-                    .fill(Color.pokemonDarkGray)
-                    .frame(height: 350)
-                    .border(Color.pokemonLightGray, width: 20)
+                    .fill(Color.pokemonLightGray)
+                    .frame(height: screenHeight + 2*padding + bottomExtraSpace)
                     .cornerRadius(20)
+                    .offset(y: bottomExtraSpace/2)
+                Rectangle()
+                    .fill(Color.pokemonDarkGray)
+                    .frame(height: screenHeight)
+                    .cornerRadius(20)
+                    .padding(padding)
                     .overlay(alignment: .center) {
                         VStack {
                             TextField("", text: $username)
@@ -30,7 +39,7 @@ struct LoginView: View {
                                 .foregroundColor(.red)
                                 .placeholder("Password", color: .red, when: password.isEmpty)
                         }
-                        .padding(40)
+                        .padding(2*padding)
                         .font8bit(size: 16)
                     }
                     .overlay(alignment: .top) {
@@ -44,12 +53,6 @@ struct LoginView: View {
                                 .frame(width: 10, height: 10)
                                 .offset(x: 50, y: 5)
                         }
-                    }
-                    .background(alignment: .bottom) {
-                        Rectangle()
-                            .fill(Color.pokemonLightGray)
-                            .cornerRadius(20)
-                            .offset(y: 20)
                     }
                     .overlay(alignment: .bottomTrailing) {
                         VStack(spacing: 2) {
@@ -74,7 +77,7 @@ struct LoginView: View {
                     }
             }
             Spacer()
-        }.padding(20)
+        }.padding(padding)
     }
 }
 
