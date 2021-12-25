@@ -10,7 +10,36 @@ import SwiftUI
 struct TrainerView: View {
 
     var body: some View {
-        Image("pokedex").offset(y: -6)
+        VStack {
+            HStack {
+                Image("gym01")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym02")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym03")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym04")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+            }
+            HStack {
+                Image("gym05")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym06")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym07")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Image("gym08")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+            }
+        }
     }
 }
 

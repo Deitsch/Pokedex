@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// animations
+// https://www.bigmountainstudio.com/community/public/posts/14750-what-are-swiftui-transitions-and-how-do-you-use-them
+
 enum LoginNavigation {
     case main
 }
