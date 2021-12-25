@@ -9,23 +9,18 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    init() {
-        
-    }
 
     var body: some View {
         TabView {
-            PokemonListView()
-                .tabItem {
-                    Image("pokeball", bundle: .main)
-                    Text("Pokedex")
-                }
             Text("Another Tab")
                 .tabItem {
                     Image(systemName: "2.square.fill")
                     Text("Second")
+                }
+            PokemonListView()
+                .tabItem {
+                    Image("pokeball", bundle: .main)
+                    Text("Pokedex")
                 }
             Text("The Last Tab")
                 .tabItem {
@@ -33,19 +28,13 @@ struct MainView: View {
                     Text("Third")
                 }
         }
-        .font(.headline)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        MainView()
     }
 }
-
-
-//    Text("Pokedex")
-//        .tabItem {
-//            Image(systemName: "2.square.fill")
-//            PokemonListView()
-//        }

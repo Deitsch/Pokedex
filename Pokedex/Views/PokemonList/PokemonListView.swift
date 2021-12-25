@@ -22,15 +22,14 @@ struct PokemonListView: View {
     private var pokemon: FetchedResults<PokemonInfo>
     
     var body: some View {
-        NavigationView {
-            List(pokemon) { p in
-                NavigationLink(destination: PokemonDetailView(pokemon: p)) {
-                    PokemonListRow(pokemon: p)
-                }
+        List(pokemon) { p in
+            NavigationLink(destination: PokemonDetailView(pokemon: p)) {
+                PokemonListRow(pokemon: p)
             }
         }.onAppear(perform: {
             api.loadPokemon()
         })
+        .navigationBarTitle("Pokemon")
     }
 }
 

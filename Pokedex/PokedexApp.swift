@@ -28,11 +28,10 @@ struct PokedexApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            MainView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//                .environment(\.api, pokedexAPI)
+//            TrainerView()
             LoginView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.api, pokedexAPI)
         }
     }
 }

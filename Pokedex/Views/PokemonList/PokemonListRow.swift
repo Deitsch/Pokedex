@@ -35,7 +35,9 @@ struct PokemonListRow: View {
     var body: some View {
         HStack {
             Text("#\(pokemon.rowId)")
+                .font8bit(size: 16)
             Text(pokemon.rowName)
+                .font8bit(size: 16)
             AsyncImage(url: URL(string: pokemon.rowSpriteURL)) { image in
                 image.resizable()
             } placeholder: {
