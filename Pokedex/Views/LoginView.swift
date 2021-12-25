@@ -115,7 +115,9 @@ struct LoginView: View {
                     }
                 }
                 .padding(padding)
+//                .animation(.none, value: false)
                 if !openPokedex {
+                    Rectangle().fill(Color.pokemonRed)
                     Image("pokedex-upper")
                         .transition(.move(edge: .top))
                         .offset(y: -6)
@@ -137,6 +139,7 @@ struct LoginView: View {
     func toggleOpenPokedex() {
         withAnimation(.linear(duration: 1)) {
             openPokedex.toggle()
+            print("toggle")
         }
     }
 }
