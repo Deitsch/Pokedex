@@ -8,27 +8,6 @@
 import SwiftUI
 import CoreData
 
-protocol PokemonListRowModel {
-    var rowId: Int { get }
-    var rowName: String { get }
-    var rowSpriteURL: String { get }
-}
-
-extension PokemonInfo: PokemonListRowModel {
-    var rowId: Int {
-        return Int(id)
-    }
-    
-    var rowName: String {
-        return name ?? ""
-    }
-    
-    var rowSpriteURL: String {
-        return spriteURL ?? ""
-    }
-    
-}
-
 struct PokemonListRow: View {
     @State var pokemon: PokemonListRowModel
     
@@ -48,7 +27,6 @@ struct PokemonListRow: View {
         }
     }
 }
-
 
 struct PokemonListRow_Previews: PreviewProvider {
     struct PokemonListRowModelPreview: PokemonListRowModel {
