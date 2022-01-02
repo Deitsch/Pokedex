@@ -12,14 +12,14 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            Text("Another Tab")
+            TrainerView(trainer: Trainer.demo)
                 .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
+                    Image("tab-trainer", bundle: .main)
+                    Text("Trainer")
                 }
             PokemonListView()
                 .tabItem {
-                    Image("pokeball", bundle: .main)
+                    Image("tab-pokeball", bundle: .main)
                     Text("Pokedex")
                 }
             Text("The Last Tab")

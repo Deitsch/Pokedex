@@ -39,3 +39,11 @@ extension View {
         font(.custom("Connection", size: size))
     }
 }
+
+
+// grayscale bool
+extension View {
+    func grayscale(_ grayscale: Bool) -> some View {
+        self.grayscale(grayscale ? 0 : 1)
+    }
+}

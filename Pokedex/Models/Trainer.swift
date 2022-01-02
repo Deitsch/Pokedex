@@ -12,6 +12,9 @@ struct Trainer {
     let name: String
     let money: String
     let badges: BadgeInfo
+    
+    static let demo = Trainer(ID: "2202", name: "Simon", money: "99999", badges: BadgeInfo(gym1: true, gym2: true, gym3: true))
+
 }
 
 struct BadgeInfo {
