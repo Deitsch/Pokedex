@@ -121,4 +121,3 @@ struct TrainerView_Previews: PreviewProvider {
         TrainerView(trainer: Trainer.demo, gym1: true, gym2: true)
     }
 }
-

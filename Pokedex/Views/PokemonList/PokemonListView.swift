@@ -40,6 +40,6 @@ private extension PokemonInfo {
 //    static var previews: some View {
 //        PokemonListView()
 //            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-//            .environment(\.api, PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext))
+//            .environmentObject(PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext))
 //    }
 //}

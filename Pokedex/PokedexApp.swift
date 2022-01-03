@@ -12,13 +12,23 @@ import PokeAPI
 struct PokedexApp: App {
     let persistenceController = PersistenceController.shared
     let pokedexAPI = PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.newBackgroundContext())
+    
+    @State var isLoggedIn = false
 
     var body: some Scene {
         WindowGroup {
-            MainView()
-//            LoginView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(pokedexAPI)
+            ZStack {
+                if !isLoggedIn {
+                    LoginView(isLoggedIn: $isLoggedIn)
+                        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                }
+                if isLoggedIn {
+                    MainView(isLoggedIn: $isLoggedIn)
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                }
+            }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(pokedexAPI)
         }
     }
 }

@@ -11,6 +11,7 @@ import CoreData
 struct MainView: View {
     
     @EnvironmentObject private var api: PokedexAPI
+    @Binding var isLoggedIn: Bool
 
     var body: some View {
             TabView {
@@ -39,8 +40,8 @@ struct MainView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView()
+//    }
+//}
