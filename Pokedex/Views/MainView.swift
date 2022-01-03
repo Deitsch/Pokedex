@@ -6,30 +6,36 @@
 //
 
 import SwiftUI
-import CoreData
+import CoreData 
 
 struct MainView: View {
+    
+    @EnvironmentObject private var api: PokedexAPI
 
     var body: some View {
-        TabView {
-            TrainerView(trainer: Trainer.demo)
-                .tabItem {
-                    Image("tab-trainer", bundle: .main)
-                    Text("Trainer")
+            TabView {
+                NavigationView {
+                    TrainerView(trainer: Trainer.demo).navigationBarTitle("Trainer")
                 }
-            PokemonListView()
                 .tabItem {
-                    Image("tab-pokeball", bundle: .main)
-                    Text("Pokedex")
+                    Label("Trainer", image: "tab-trainer")
                 }
-            Text("The Last Tab")
+                
+                NavigationView {
+                    PokemonListView().navigationBarTitle("Pokemon")
+                }
                 .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
+                    Label("Pokedex", image: "tab-pokeball")
                 }
-        }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+                
+                Text("The Last Tab")
+                    .tabItem {
+                        Image(systemName: "3.square.fill")
+                        Text("Third")
+                    }
+            }.onAppear(perform: {
+                api.loadPokemon()
+        })
     }
 }
 

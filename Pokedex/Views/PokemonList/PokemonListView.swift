@@ -7,17 +7,14 @@
 
 import Foundation
 import SwiftUI
-import Combine
 import PokeAPI
 
 struct PokemonListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.api) private var api
+    @EnvironmentObject private var api: PokedexAPI
     
     @FetchRequest(
-      sortDescriptors: [
-        NSSortDescriptor(keyPath: \PokemonInfo.id, ascending: true)
-      ],
+      sortDescriptors: [NSSortDescriptor(keyPath: \PokemonInfo.id, ascending: true)],
       animation: .default)
     private var pokemon: FetchedResults<PokemonInfo>
     
@@ -26,10 +23,10 @@ struct PokemonListView: View {
             NavigationLink(destination: PokemonDetailView(pokemon: p)) {
                 PokemonListRow(pokemon: p)
             }
-        }.onAppear(perform: {
+        }
+        .refreshable {
             api.loadPokemon()
-        })
-        .navigationBarTitle("Pokemon")
+        }
     }
 }
 
@@ -43,6 +40,6 @@ private extension PokemonInfo {
 //    static var previews: some View {
 //        PokemonListView()
 //            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-//            .environment(\.api, PokeApi())
+//            .environment(\.api, PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext))
 //    }
 //}

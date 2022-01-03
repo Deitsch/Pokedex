@@ -6,35 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct Trainer {
+class Trainer {
     let ID: String
     let name: String
     let money: String
-    let badges: BadgeInfo
     
-    static let demo = Trainer(ID: "2202", name: "Simon", money: "99999", badges: BadgeInfo(gym1: true, gym2: true, gym3: true))
-
-}
-
-struct BadgeInfo {
-    let gym1: Bool
-    let gym2: Bool
-    let gym3: Bool
-    let gym4: Bool
-    let gym5: Bool
-    let gym6: Bool
-    let gym7: Bool
-    let gym8: Bool
-    
-    init(gym1: Bool = false, gym2: Bool = false, gym3: Bool = false, gym4: Bool = false, gym5: Bool = false, gym6: Bool = false, gym7: Bool = false, gym8: Bool = false) {
-        self.gym1 = gym1
-        self.gym2 = gym2
-        self.gym3 = gym3
-        self.gym4 = gym4
-        self.gym5 = gym5
-        self.gym6 = gym6
-        self.gym7 = gym7
-        self.gym8 = gym8
+    init(id: String, name: String, money: String) {
+        self.ID = id
+        self.name = name
+        self.money = money
     }
+    
+    static let demo = Trainer(id: "2202", name: "Simon", money: "99999")
 }
