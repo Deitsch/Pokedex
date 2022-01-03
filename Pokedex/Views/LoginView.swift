@@ -120,18 +120,25 @@ struct LoginView: View {
                 .padding(padding)
 //                .animation(.none, value: false)
                 if !openPokedex {
-                    Rectangle().fill(Color.pokemonRed)
+                    Rectangle()
+                        .fill(Color.pokemonRed)
+                        .zIndex(4)
                     Image("pokedex-upper")
                         .transition(.move(edge: .top))
                         .offset(y: -6)
                         .onTapGesture{ toggleOpenPokedex() }
+                        .zIndex(5)
                     Image("pokedex-lower")
                         .transition(.move(edge: .bottom))
                         .offset(y: -6)
                         .onTapGesture{ toggleOpenPokedex() }
-                    Text("Tap to open Pokedex")
-                        .font8bit(size: 20)
-                        .foregroundColor(.white)
+                        .zIndex(6)
+                        .overlay {
+                            Text("Tap to open Pokedex")
+                                .font8bit(size: 20)
+                                .foregroundColor(.white)
+                                .zIndex(7)
+                        }
                 }
             }
             .background(Color.pokemonRed)
