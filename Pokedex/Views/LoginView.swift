@@ -46,12 +46,18 @@ struct LoginView: View {
                             .padding(padding)
                             .overlay(alignment: .center) {
                                 VStack {
-                                    TextField("", text: $username)
-                                        .foregroundColor(.red)
-                                        .placeholder("Username", color: .red, when: username.isEmpty)
-                                    TextField("", text: $password)
-                                        .foregroundColor(.red)
-                                        .placeholder("Password", color: .red, when: password.isEmpty)
+                                    HStack {
+                                        Text("Username").foregroundColor(.red)
+                                        TextField("", text: $username)
+                                            .borderBottom()
+                                            .foregroundColor(.red)
+                                    }
+                                    HStack {
+                                        Text("Password").foregroundColor(.red)
+                                        TextField("", text: $password)
+                                            .borderBottom()
+                                            .foregroundColor(.red)
+                                    }
                                 }
                                 .padding(2*padding)
                                 .font8bit(size: 16)
@@ -118,6 +124,7 @@ struct LoginView: View {
                     }
                 }
                 .padding(padding)
+                .zIndex(8)
 //                .animation(.none, value: false)
                 if !openPokedex {
                     Rectangle()
@@ -149,7 +156,6 @@ struct LoginView: View {
     func toggleOpenPokedex() {
         withAnimation(.linear(duration: 1)) {
             openPokedex.toggle()
-            print("toggle")
         }
     }
 }
