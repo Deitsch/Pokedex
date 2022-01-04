@@ -7,16 +7,15 @@
 
 import Foundation
 import SwiftUI
-import PokeAPI
 
 struct PokemonListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var api: PokedexAPI
+    @EnvironmentObject private var api: PokedAPIWrapper
     
     @FetchRequest(
-      sortDescriptors: [NSSortDescriptor(keyPath: \PokemonInfo.id, ascending: true)],
+      sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
       animation: .default)
-    private var pokemon: FetchedResults<PokemonInfo>
+    private var pokemon: FetchedResults<Pokemon>
     
     var body: some View {
         List(pokemon) { p in
@@ -30,7 +29,7 @@ struct PokemonListView: View {
     }
 }
 
-private extension PokemonInfo {
+private extension Pokemon {
     var label: String {
         return (name ?? "") + " #\(id)"
     }

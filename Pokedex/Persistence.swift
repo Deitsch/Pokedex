@@ -14,7 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for i in 0..<10 {
-            let newPokemon = PokemonInfo(context: viewContext)
+            let newPokemon = Pokemon(context: viewContext)
 //            newPokemon.id = Int32(i)
 //            newPokemon.name = "Pokemon\(i)"
         }
@@ -29,11 +29,11 @@ struct PersistenceController {
         return result
     }()
     
-    static var previewPokemon: [PokemonInfo] {
+    static var previewPokemon: [Pokemon] {
         let context = PersistenceController.preview.container.viewContext
 
-        let fetchPokemonInfo: NSFetchRequest<PokemonInfo> = PokemonInfo.fetchRequest()
-        let results = try! context.fetch(fetchPokemonInfo)
+        let fetchPokemon: NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
+        let results = try! context.fetch(fetchPokemon)
 
         return results
     }
@@ -45,6 +45,8 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

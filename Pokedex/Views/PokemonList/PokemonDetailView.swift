@@ -6,11 +6,26 @@
 //
 
 import SwiftUI
+import PokeAPI
 
 struct PokemonDetailView: View {
-    @State var pokemon: PokemonInfo
-    
+    @ObservedObject var pokemon: Pokemon
+    @EnvironmentObject private var api: PokedAPIWrapper
+
     var body: some View {
-        Text(pokemon.name ?? "")
+        VStack {
+            Text(pokemon.name ?? "")
+            Text("Weight: \(pokemon.weight)")
+            Text("Height: \(pokemon.height)")
+        }.onAppear {
+            api.loadPokemon(id: Int(pokemon.id))
+        }
     }
 }
+
+//struct PokemonDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PokemonDetailView(pokemon: PokemonListRowModelPreview.demo)
+//            .environmentObject(PokedAPIWrapper(api: PokeAPIco(), context: PersistenceController.shared.container.newBackgroundContext()))
+//    }
+//}

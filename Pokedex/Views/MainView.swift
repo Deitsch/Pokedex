@@ -10,7 +10,7 @@ import CoreData
 
 struct MainView: View {
     
-    @EnvironmentObject private var api: PokedexAPI
+    @EnvironmentObject private var api: PokedAPIWrapper
     @Binding var isLoggedIn: Bool
 
     var body: some View {

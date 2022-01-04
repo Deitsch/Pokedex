@@ -15,7 +15,7 @@ protocol PokemonListRowModel {
     var rowSpriteURL: String { get }
 }
 
-extension PokemonInfo: PokemonListRowModel {
+extension Pokemon: PokemonListRowModel {
     var rowId: Int {
         return Int(id)
     }
@@ -28,4 +28,12 @@ extension PokemonInfo: PokemonListRowModel {
         return spriteURL ?? ""
     }
     
+}
+
+struct PokemonListRowModelPreview: PokemonListRowModel {
+    var rowId: Int
+    var rowName: String
+    var rowSpriteURL: String
+    
+    static let demo = PokemonListRowModelPreview(rowId: 1, rowName: "bulbasaur", rowSpriteURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/1.png")
 }

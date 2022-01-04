@@ -29,14 +29,7 @@ struct PokemonListRow: View {
 }
 
 struct PokemonListRow_Previews: PreviewProvider {
-    struct PokemonListRowModelPreview: PokemonListRowModel {
-        var rowId: Int
-        var rowName: String
-        var rowSpriteURL: String
-    }
-    
     static var previews: some View {
-        let pokemon = PokemonListRowModelPreview(rowId: 1, rowName: "bulbasaur", rowSpriteURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/1.png")
-        return PokemonListRow(pokemon: pokemon)
+        PokemonListRow(pokemon: PokemonListRowModelPreview.demo)
     }
 }
