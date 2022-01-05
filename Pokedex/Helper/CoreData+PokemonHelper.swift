@@ -39,6 +39,7 @@ extension Pokemon {
         populateTypes(types: pokemon.types, context: context)
         populateAbilites(abilities: pokemon.abilities, context: context)
 //        populateStats(stats: pokemon.stats)
+        populateSprites(sprites: pokemon.sprites)
     }
     
     private func populateTypes(types: [APIPokemon.PokemonType], context: NSManagedObjectContext) {
@@ -59,6 +60,7 @@ extension Pokemon {
     }
     
     private func populateAbilites(abilities: [APIPokemon.PokemonAbility], context: NSManagedObjectContext) {
+        // TODO: empty types first to re add them - this way always latest are used
         abilities.forEach { ability in
             let fetchRequest = PokemonAbility.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "name = %@", ability.name)
@@ -78,7 +80,7 @@ extension Pokemon {
         self.stats = stats.map { Stat(apiPokemonStats: $0) }
     }
     
-    private func populateStats(sprites: APIPokemon.PokemonSprites) {
+    private func populateSprites(sprites: APIPokemon.PokemonSprites) {
         self.spirtes = Sprites(apiPokemonSprites: sprites)
     }
 }

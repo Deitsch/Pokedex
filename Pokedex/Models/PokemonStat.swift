@@ -28,7 +28,7 @@ import Foundation
     
     public required init?(coder: NSCoder) {
         name = coder.decodeObject(of: NSString.self, forKey: CodingKeys.name.rawValue) as String? ?? ""
-        value = coder.decodeObject(of: NSNumber.self, forKey: CodingKeys.value.rawValue)?.intValue ?? 0
+        value = coder.decodeInteger(forKey: CodingKeys.value.rawValue)
     }
     
     public func encode(with coder: NSCoder) {
