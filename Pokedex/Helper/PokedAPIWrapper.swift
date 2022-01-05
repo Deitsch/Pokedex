@@ -15,22 +15,28 @@ typealias APIPokemonSummary = PokeAPI.PokemonSummary
 
 class PokedAPIWrapper {
     private let api: PokeAPIco
-    private let context: NSManagedObjectContext
+    private let container: NSPersistentContainer
+    private let backgroundContext: NSManagedObjectContext
     private var cancelables: [AnyCancellable] = []
     
-    init(api: PokeAPIco, context: NSManagedObjectContext) {
+    init(api: PokeAPIco, container: NSPersistentContainer) {
         self.api = api
-        self.context = context
+        self.container = container
+        backgroundContext = container.newBackgroundContext()
     }
     
     func loadPokemon() {
-        api.loadPokemon().sink(receiveCompletion: {_ in }, receiveValue: { value in
+        api.loadPokemon()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
             value.forEach { self.saveOrUpdatePokemon(pokemonSummary: $0) }
         }).store(in: &cancelables)
     }
     
     func loadPokemon(id: Int) {
-        api.loadPokemon(by: id).sink(receiveCompletion: {_ in }, receiveValue: { value in
+        api.loadPokemon(by: id)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
             self.saveOrUpdatePokemon(pokemon: value)
         }).store(in: &cancelables)
     }
@@ -39,8 +45,8 @@ class PokedAPIWrapper {
         let fetchPokemon: NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
         fetchPokemon.predicate = NSPredicate(format: "id = %i", pokemonSummary.id)
 
-        let results = try? context.fetch(fetchPokemon)
-        let pokemon = results?.count == 0 ? Pokemon(context: context) : results?.first
+        let results = try? backgroundContext.fetch(fetchPokemon)
+        let pokemon = results?.count == 0 ? Pokemon(context: backgroundContext) : results?.first
         
         pokemon?.populate(pokemonSummary: pokemonSummary)
         saveContext()
@@ -50,7 +56,7 @@ class PokedAPIWrapper {
         let fetchPokemon: NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
         fetchPokemon.predicate = NSPredicate(format: "id = %i", pokemon.id)
 
-        guard let results = try? context.fetch(fetchPokemon),
+        guard let results = try? backgroundContext.fetch(fetchPokemon),
               let p = results.first else {
               assertionFailure("there should have been an Pokemon when loading details")
             return
@@ -64,7 +70,8 @@ class PokedAPIWrapper {
     
     private  func saveContext() {
       do {
-        try context.save()
+          try backgroundContext.save()
+          try container.viewContext.save()
       } catch {
         print("Error saving managed object context: \(error)")
       }

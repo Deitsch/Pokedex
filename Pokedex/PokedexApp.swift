@@ -11,7 +11,7 @@ import PokeAPI
 @main
 struct PokedexApp: App {
     let persistenceController = PersistenceController.shared
-    let pokedexAPI = PokedAPIWrapper(api: PokeAPIco(), context: PersistenceController.shared.container.newBackgroundContext())
+    let pokedexAPI = PokedAPIWrapper(api: PokeAPIco(), container: PersistenceController.shared.container)
     
     @State var isLoggedIn = false
 

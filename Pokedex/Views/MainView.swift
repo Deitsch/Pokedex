@@ -16,15 +16,19 @@ struct MainView: View {
     var body: some View {
             TabView {
                 NavigationView {
-                    TrainerView(trainer: Trainer.demo).navigationBarTitle("Trainer")
+                    TrainerView(trainer: Trainer.demo)
+                        .navigationTitle("Trainer") // is the same as .navigationBarTitle("Trainer")
                 }
+                .navigationViewStyle(StackNavigationViewStyle()) // fixes navigationTitle constraint breaking error
                 .tabItem {
                     Label("Trainer", image: "tab-trainer")
                 }
                 
                 NavigationView {
-                    PokemonListView().navigationBarTitle("Pokemon")
+                    PokemonListView()
+                        .navigationTitle("Pokemon")
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .tabItem {
                     Label("Pokedex", image: "tab-pokeball")
                 }

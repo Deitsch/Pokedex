@@ -15,8 +15,8 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for i in 0..<10 {
             let newPokemon = Pokemon(context: viewContext)
-//            newPokemon.id = Int32(i)
-//            newPokemon.name = "Pokemon\(i)"
+            newPokemon.id = Int32(i)
+            newPokemon.name = "Pokemon\(i)"
         }
         do {
             try viewContext.save()
@@ -45,6 +45,8 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
