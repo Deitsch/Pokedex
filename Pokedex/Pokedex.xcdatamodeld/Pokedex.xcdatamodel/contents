@@ -6,7 +6,7 @@
         <attribute name="name" attributeType="String"/>
         <attribute name="spirtes" optional="YES" attributeType="Transformable" valueTransformerName="PokedexTransformer" customClassName="Sprites"/>
         <attribute name="spriteURL" attributeType="String"/>
-        <attribute name="stats" optional="YES" attributeType="Transformable" valueTransformerName="PokedexTransformer" customClassName="[Stat]"/>
+        <attribute name="stats" optional="YES" attributeType="Transformable" valueTransformerName="PokedexTransformer" customClassName="StatWrapper"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="abilities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonAbility" inverseName="pokemons" inverseEntity="PokemonAbility"/>

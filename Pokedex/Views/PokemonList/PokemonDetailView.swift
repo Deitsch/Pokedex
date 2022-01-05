@@ -25,7 +25,7 @@ struct PokemonDetailView: View {
                 Text($0.name ?? "")
             }
             Text(pokemon.spirtes?.frontDefault ?? "no sprite")
-            ForEach(pokemon.stats ?? []) {
+            ForEach(pokemon.statArray) {
                 Text("\($0.name): \($0.value)")
             }
         }.onAppear {

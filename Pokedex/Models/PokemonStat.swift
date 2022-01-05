@@ -7,6 +7,31 @@
 
 import Foundation
 
+@objc public class StatWrapper: NSObject, NSSecureCoding {
+    
+    let stats: [Stat]
+    
+    init(stats: [Stat]) {
+        self.stats = stats
+    }
+    
+    // MARK: NSSecureCoding conformance for Transformable CoreData
+    
+    enum CodingKeys: String {
+        case stats
+    }
+    
+    public static var supportsSecureCoding = true
+    
+    public required init?(coder: NSCoder) {
+        stats = coder.decodeObject(of: NSArray.self, forKey: CodingKeys.stats.rawValue) as! [Stat]
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(stats, forKey: CodingKeys.stats.rawValue)
+    }
+}
+
 @objc public class Stat: NSObject, NSSecureCoding {
     
     let name: String

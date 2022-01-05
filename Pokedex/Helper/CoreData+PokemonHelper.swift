@@ -23,6 +23,10 @@ extension Pokemon {
         let set = abilities as? Set<PokemonAbility> ?? []
         return Array(set)
     }
+    
+    public var statArray: [Stat] {
+        return stats?.stats ?? []
+    }
 }
 
 extension Pokemon {
@@ -38,7 +42,7 @@ extension Pokemon {
         height = Int32(pokemon.height)
         populateTypes(types: pokemon.types, context: context)
         populateAbilites(abilities: pokemon.abilities, context: context)
-//        populateStats(stats: pokemon.stats)
+        populateStats(stats: pokemon.stats)
         populateSprites(sprites: pokemon.sprites)
     }
     
@@ -77,7 +81,7 @@ extension Pokemon {
     }
     
     private func populateStats(stats: [APIPokemon.PokemonStat]) {
-        self.stats = stats.map { Stat(apiPokemonStats: $0) }
+        self.stats = StatWrapper(stats: stats.map { Stat(apiPokemonStats: $0) })
     }
     
     private func populateSprites(sprites: APIPokemon.PokemonSprites) {
