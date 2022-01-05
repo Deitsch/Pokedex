@@ -9,7 +9,7 @@ import Foundation
 
 @objc public class StatWrapper: NSObject, NSSecureCoding {
     
-    let stats: [Stat]
+    var stats: [Stat] = []
     
     init(stats: [Stat]) {
         self.stats = stats
@@ -24,7 +24,7 @@ import Foundation
     public static var supportsSecureCoding = true
     
     public required init?(coder: NSCoder) {
-        stats = coder.decodeObject(of: NSArray.self, forKey: CodingKeys.stats.rawValue) as! [Stat]
+        stats = coder.decodeObject(of: [NSArray.self, Stat.self], forKey: CodingKeys.stats.rawValue) as? [Stat] ?? []
     }
     
     public func encode(with coder: NSCoder) {
@@ -57,7 +57,6 @@ import Foundation
     }
     
     public func encode(with coder: NSCoder) {
-        
         coder.encode(name, forKey: CodingKeys.name.rawValue)
         coder.encode(value, forKey: CodingKeys.value.rawValue)
     }

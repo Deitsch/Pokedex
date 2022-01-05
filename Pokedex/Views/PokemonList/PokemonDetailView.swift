@@ -26,7 +26,7 @@ struct PokemonDetailView: View {
             }
             Text(pokemon.spirtes?.frontDefault ?? "no sprite")
             ForEach(pokemon.statArray) {
-                Text("\($0.name): \($0.value)")
+                Text("\($0.name)")
             }
         }.onAppear {
             api.loadPokemon(id: Int(pokemon.id))
