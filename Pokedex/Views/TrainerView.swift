@@ -23,95 +23,97 @@ struct TrainerView: View {
     let badgeSide: CGFloat = 70
 
     var body: some View {
-        VStack {
-            Image("trainer")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 200)
+        ScrollView {
             VStack {
-                HStack {
-                    Text("Name")
-                    Spacer()
-                    Text("\(trainer.name)")
-                }
+                Image("trainer")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                VStack {
+                    HStack {
+                        Text("Name")
+                        Spacer()
+                        Text("\(trainer.name)")
+                    }
+                    
+                    HStack {
+                        Text("ID")
+                        Spacer()
+                        Text("\(trainer.ID)")
+                    }
                 
-                HStack {
-                    Text("ID")
-                    Spacer()
-                    Text("\(trainer.ID)")
+                    HStack {
+                        Text("Money")
+                        Spacer()
+                        Text("\(trainer.money)¥")
+                    }
                 }
-            
-                HStack {
-                    Text("Money")
-                    Spacer()
-                    Text("\(trainer.money)¥")
+                .font8bit(size: 20)
+                .padding(30)
+                VStack {
+                    HStack {
+                        Image("gym01")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym1)
+                            .onTapGesture {
+                                gym1.toggle()
+                            }
+                        Image("gym02")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym2)
+                            .onTapGesture {
+                                gym2.toggle()
+                            }
+                        Image("gym03")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym3)
+                            .onTapGesture {
+                                gym3.toggle()
+                            }
+                        Image("gym04")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym4)
+                            .onTapGesture {
+                                gym4.toggle()
+                            }
+                    }
+                    HStack {
+                        Image("gym05")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym5)
+                            .onTapGesture {
+                                gym5.toggle()
+                            }
+                        Image("gym06")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym6)
+                            .onTapGesture {
+                                gym6.toggle()
+                            }
+                        Image("gym07")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym7)
+                            .onTapGesture {
+                                gym7.toggle()
+                            }
+                        Image("gym08")
+                            .resizable()
+                            .frame(width: badgeSide, height: badgeSide)
+                            .grayscale(gym8)
+                            .onTapGesture {
+                                gym8.toggle()
+                            }
+                    }
                 }
+                Spacer()
             }
-            .font8bit(size: 20)
-            .padding(30)
-            VStack {
-                HStack {
-                    Image("gym01")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym1)
-                        .onTapGesture {
-                            gym1.toggle()
-                        }
-                    Image("gym02")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym2)
-                        .onTapGesture {
-                            gym2.toggle()
-                        }
-                    Image("gym03")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym3)
-                        .onTapGesture {
-                            gym3.toggle()
-                        }
-                    Image("gym04")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym4)
-                        .onTapGesture {
-                            gym4.toggle()
-                        }
-                }
-                HStack {
-                    Image("gym05")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym5)
-                        .onTapGesture {
-                            gym5.toggle()
-                        }
-                    Image("gym06")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym6)
-                        .onTapGesture {
-                            gym6.toggle()
-                        }
-                    Image("gym07")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym7)
-                        .onTapGesture {
-                            gym7.toggle()
-                        }
-                    Image("gym08")
-                        .resizable()
-                        .frame(width: badgeSide, height: badgeSide)
-                        .grayscale(gym8)
-                        .onTapGesture {
-                            gym8.toggle()
-                        }
-                }
-            }
-            Spacer()
         }
     }
 }
