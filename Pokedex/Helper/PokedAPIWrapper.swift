@@ -58,13 +58,11 @@ class PokedAPIWrapper {
 
         guard let results = try? backgroundContext.fetch(fetchPokemon),
               let p = results.first else {
-              assertionFailure("there should have been an Pokemon when loading details")
+              assertionFailure("there should already have been an Pokemon when loading details")
             return
         }
         
-        p.populate(pokemon: pokemon)
-        print("w", p.weight)
-        print("h", p.height)
+        p.populate(pokemon: pokemon, context: backgroundContext)
         saveContext()
     }
     
@@ -75,19 +73,5 @@ class PokedAPIWrapper {
       } catch {
         print("Error saving managed object context: \(error)")
       }
-    }
-}
-
-extension Pokemon {
-    func populate(pokemonSummary: APIPokemonSummary) {
-        id = Int32(pokemonSummary.id)
-        name = pokemonSummary.name
-        url = pokemonSummary.url
-        spriteURL = pokemonSummary.spriteUrl
-    }
-    
-    func populate(pokemon: APIPokemon) {
-        weight = Int32(pokemon.weight)
-        height = Int32(pokemon.height)
     }
 }

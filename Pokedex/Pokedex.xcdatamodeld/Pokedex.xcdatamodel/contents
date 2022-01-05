@@ -4,34 +4,17 @@
         <attribute name="height" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="spirtes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="Sprites"/>
         <attribute name="spriteURL" attributeType="String"/>
+        <attribute name="stats" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[Stat]"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="abilities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonAbility" inverseName="pokemons" inverseEntity="PokemonAbility"/>
-        <relationship name="sprites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PokemonSprites" inverseName="pokemon" inverseEntity="PokemonSprites"/>
-        <relationship name="stats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonStat" inverseName="pokemons" inverseEntity="PokemonStat"/>
         <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonType" inverseName="pokemons" inverseEntity="PokemonType"/>
     </entity>
     <entity name="PokemonAbility" representedClassName="PokemonAbility" syncable="YES" codeGenerationType="class">
-        <attribute name="isHidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="pokemons" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="abilities" inverseEntity="Pokemon"/>
-    </entity>
-    <entity name="PokemonSprites" representedClassName="PokemonSprites" syncable="YES" codeGenerationType="class">
-        <attribute name="backDefault" optional="YES" attributeType="String"/>
-        <attribute name="backFemale" optional="YES" attributeType="String"/>
-        <attribute name="backShiny" optional="YES" attributeType="String"/>
-        <attribute name="backShinyFemale" optional="YES" attributeType="String"/>
-        <attribute name="frontDefault" optional="YES" attributeType="String"/>
-        <attribute name="frontFemale" optional="YES" attributeType="String"/>
-        <attribute name="frontShiny" optional="YES" attributeType="String"/>
-        <attribute name="frontShinyFemale" optional="YES" attributeType="String"/>
-        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="sprites" inverseEntity="Pokemon"/>
-    </entity>
-    <entity name="PokemonStat" representedClassName="PokemonStat" syncable="YES" codeGenerationType="class">
-        <attribute name="baseStat" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="pokemons" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="stats" inverseEntity="Pokemon"/>
     </entity>
     <entity name="PokemonType" representedClassName="PokemonType" syncable="YES" codeGenerationType="class">
         <attribute name="type" optional="YES" attributeType="String"/>
@@ -39,9 +22,7 @@
     </entity>
     <elements>
         <element name="Pokemon" positionX="-63" positionY="-18" width="128" height="179"/>
+        <element name="PokemonAbility" positionX="-54" positionY="36" width="128" height="59"/>
         <element name="PokemonType" positionX="-63" positionY="27" width="128" height="59"/>
-        <element name="PokemonAbility" positionX="-54" positionY="36" width="128" height="74"/>
-        <element name="PokemonStat" positionX="-36" positionY="45" width="128" height="74"/>
-        <element name="PokemonSprites" positionX="-18" positionY="54" width="128" height="164"/>
     </elements>
 </model>
