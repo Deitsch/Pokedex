@@ -9,27 +9,71 @@ import SwiftUI
 import PokeAPI
 
 struct PokemonDetailView: View {
-    @ObservedObject var pokemon: Pokemon
+    @ObservedObject var pokemon: Pokedex.Pokemon
     @EnvironmentObject private var api: PokedAPIWrapper
 
     var body: some View {
-        VStack {
-            Text(pokemon.name ?? "")
-            Text("Weight: \(pokemon.weight)")
-            Text("Height: \(pokemon.height)")
-            // TODO: load type to enum and get type badges accordingly
-            ForEach(pokemon.typeArray) {
-                Text($0.type ?? "")
+        ScrollView {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    if let sprites = pokemon.spirtes, let pokemonUrl = URL(string: sprites.frontDefault) {
+                        AsyncImage(url: pokemonUrl)
+                    }
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    ForEach(pokemon.typeArray) {
+                        $0.image
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                    Spacer()
+                }
+                
+                VStack {
+                    HStack {
+                        Text("Weight")
+                        Spacer()
+                        Text("\(pokemon.weight)")
+                    }
+                    HStack {
+                        Text("Height")
+                        Spacer()
+                        Text("\(pokemon.height)")
+                    }
+                }
+                
+                Spacer()
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Stats").font8bit(size: 20, bold: true)
+                    ForEach(pokemon.statArray) { stat in
+                        HStack {
+                            Text("\(stat.name)")
+                            Spacer()
+                            Text("\(stat.value)")
+                        }
+                    }
+                }
+                Spacer()
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Abilities").font8bit(size: 20, bold: true)
+                    ForEach(pokemon.abilityArray) {
+                        Text($0.name ?? "")
+                    }
+                }
+                Spacer()
             }
-            ForEach(pokemon.abilityArray) {
-                Text($0.name ?? "")
+            .padding(.leading, 30)
+            .padding(.trailing, 30)
+            .font8bit(size: 14)
+            .onAppear {
+                api.loadPokemon(id: Int(pokemon.id))
             }
-            Text(pokemon.spirtes?.frontDefault ?? "no sprite")
-            ForEach(pokemon.statArray) {
-                Text("\($0.name)")
-            }
-        }.onAppear {
-            api.loadPokemon(id: Int(pokemon.id))
+            .navigationTitle(pokemon.name ?? "")
         }
     }
 }

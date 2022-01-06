@@ -1,5 +1,5 @@
 //
-//  PokemonCoreDataHelper.swift
+//  CoreData+Pokemon.swift
 //  Pokedex
 //
 //  Created by Simon Deutsch on 05.01.22.
@@ -13,26 +13,9 @@ import PokeAPI
 // https://academy.realm.io/posts/nspredicate-cheatsheet/
 
 extension Pokemon {
-    public var typeArray: [PokemonType] {
-        let set = types as? Set<PokemonType> ?? []
-        return Array(set)
-    }
-    
-    
-    public var abilityArray: [PokemonAbility] {
-        let set = abilities as? Set<PokemonAbility> ?? []
-        return Array(set)
-    }
-    
-    public var statArray: [Stat] {
-        return stats?.stats ?? []
-    }
-}
-
-extension Pokemon {
     func populate(pokemonSummary: APIPokemonSummary) {
         id = Int32(pokemonSummary.id)
-        name = pokemonSummary.name
+        name = pokemonSummary.name.capitalizingFirstLetter()
         url = pokemonSummary.url
         spriteURL = pokemonSummary.spriteUrl
     }
