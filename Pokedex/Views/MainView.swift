@@ -18,6 +18,11 @@ struct MainView: View {
                 NavigationView {
                     TrainerView(trainer: Trainer.demo)
                         .navigationTitle("Trainer") // is the same as .navigationBarTitle("Trainer")
+                        .toolbar {
+                            Button("Lock") {
+                                isLoggedIn.toggle()
+                            }
+                        }
                 }
                 .navigationViewStyle(StackNavigationViewStyle()) // fixes navigationTitle constraint breaking error
                 .tabItem {
