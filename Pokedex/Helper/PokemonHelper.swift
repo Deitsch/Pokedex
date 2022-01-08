@@ -29,4 +29,8 @@ extension Pokemon {
         }
         return [URL(string: sprites.frontDefault), URL(string: sprites.backDefault)].compactMap{ $0 }
     }
+    
+    public var label: String {
+        return (name ?? "") + " #\(id)"
+    }
 }

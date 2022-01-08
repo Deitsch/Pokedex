@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "pokeball.png",
+      "filename" : "pokeball-32.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "pokeball@2.png",
+      "filename" : "pokeball-64.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "pokeball@3.png",
+      "filename" : "pokeball-128.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

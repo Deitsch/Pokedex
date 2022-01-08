@@ -13,7 +13,7 @@ import PokeAPI
 typealias APIPokemon = PokeAPI.Pokemon
 typealias APIPokemonSummary = PokeAPI.PokemonSummary
 
-class PokedAPIWrapper {
+class PokedAPIController {
     private let api: PokeAPIco
     private let container: NSPersistentContainer
     private let backgroundContext: NSManagedObjectContext
@@ -66,12 +66,17 @@ class PokedAPIWrapper {
         saveContext()
     }
     
-    private  func saveContext() {
+    func saveContext() {
       do {
           try backgroundContext.save()
           try container.viewContext.save()
       } catch {
         print("Error saving managed object context: \(error)")
       }
+    }
+    
+    func toggleTeam(pokemon: Pokemon) {
+        pokemon.inTeam.toggle()
+        saveContext()
     }
 }

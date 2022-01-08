@@ -10,7 +10,7 @@ import CoreData
 
 struct MainView: View {
     
-    @EnvironmentObject private var api: PokedAPIWrapper
+    @EnvironmentObject private var api: PokedAPIController
     @Binding var isLoggedIn: Bool
 
     var body: some View {
@@ -38,11 +38,14 @@ struct MainView: View {
                     Label("Pokedex", image: "tab-pokeball")
                 }
                 
-                Text("The Last Tab")
-                    .tabItem {
-                        Image(systemName: "3.square.fill")
-                        Text("Third")
-                    }
+                NavigationView {
+                    TeamView()
+                        .navigationTitle("Team")
+                }
+                .navigationViewStyle(StackNavigationViewStyle())
+                .tabItem {
+                    Label("Pokedex", systemImage: "star")
+                }
             }.onAppear(perform: {
                 api.loadPokemon()
         })
