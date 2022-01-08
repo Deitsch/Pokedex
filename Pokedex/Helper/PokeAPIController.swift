@@ -13,7 +13,8 @@ import PokeAPI
 typealias APIPokemon = PokeAPI.Pokemon
 typealias APIPokemonSummary = PokeAPI.PokemonSummary
 
-class PokedAPIController {
+class PokeAPIController {
+    static let teamSize = 6
     private let api: PokeAPIco
     private let container: NSPersistentContainer
     private let backgroundContext: NSManagedObjectContext
@@ -75,8 +76,23 @@ class PokedAPIController {
       }
     }
     
-    func toggleTeam(pokemon: Pokemon) {
+    func toggleTeam(pokemon: Pokemon) -> Bool {
+        if pokemon.inTeam == true {
+            pokemon.inTeam.toggle()
+            saveContext()
+            return true
+        }
+        
+        let fetchPokemon: NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
+        fetchPokemon.predicate = NSPredicate(format: "%K == YES", #keyPath(Pokedex.Pokemon.inTeam))
+        
+        guard let results = try? backgroundContext.fetch(fetchPokemon),
+              results.count < PokeAPIController.teamSize else {
+            return false
+        }
+        
         pokemon.inTeam.toggle()
         saveContext()
+        return true
     }
 }

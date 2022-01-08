@@ -10,7 +10,7 @@ import CoreData
 
 struct MainView: View {
     
-    @EnvironmentObject private var api: PokedAPIController
+    @EnvironmentObject private var api: PokeAPIController
     @Binding var isLoggedIn: Bool
 
     var body: some View {
@@ -40,7 +40,6 @@ struct MainView: View {
                 
                 NavigationView {
                     TeamView()
-                        .navigationTitle("Team")
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
                 .tabItem {

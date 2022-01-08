@@ -10,7 +10,7 @@ import PokeAPI
 
 struct PokemonDetailView: View {
     @ObservedObject var pokemon: Pokedex.Pokemon
-    @EnvironmentObject private var api: PokedAPIController
+    @EnvironmentObject private var api: PokeAPIController
 
     var body: some View {
         ScrollView {

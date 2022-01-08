@@ -10,12 +10,14 @@ import SwiftUI
 
 struct PokemonListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var controller: PokedAPIController
+    @EnvironmentObject private var controller: PokeAPIController
     
     @FetchRequest(
       sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
       animation: .default)
     private var pokemon: FetchedResults<Pokemon>
+    
+    @State var showingAlert = false
     
     var body: some View {
         List(pokemon) { p in
@@ -23,7 +25,7 @@ struct PokemonListView: View {
                 PokemonListRow(pokemon: p)
             }.swipeActions(edge: .trailing) {
                 Button(role: .cancel) {
-                    controller.toggleTeam(pokemon: p)
+                    showingAlert = !controller.toggleTeam(pokemon: p)
                 } label: {
                     Label("Add", image: p.inTeam ? "pokeball" : "pokeball-gray")
                 }
@@ -31,6 +33,9 @@ struct PokemonListView: View {
         }
         .refreshable {
             controller.loadPokemon()
+        }
+        .alert("Team is full, remove Pokemon first", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
         }
     }
 }
