@@ -12,12 +12,18 @@ struct PokemonListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var controller: PokeAPIController
     
+    @State private var showingAlert = false
+    @State private var searchText = ""
+    
     @FetchRequest(
       sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
-      animation: .default)
+      animation: .default
+    )
     private var pokemon: FetchedResults<Pokemon>
     
-    @State var showingAlert = false
+    var pokemonNames: [String] {
+        return pokemon.compactMap{ $0.name }
+    }
     
     var body: some View {
         List(pokemon) { p in
@@ -33,6 +39,17 @@ struct PokemonListView: View {
         }
         .refreshable {
             controller.loadPokemon()
+        }
+//        .searchable(text: $searchText) {
+//            ForEach(pokemonNames, id: \.self) { pokemonName in
+//                    Text(pokemonName).searchCompletion(pokemonName)
+//            }
+//        }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { sText in
+            pokemon.nsPredicate = sText.isEmpty
+                ? nil
+                : NSPredicate(format: "%K CONTAINS[cd] %@", #keyPath(Pokedex.Pokemon.name), sText)
         }
         .alert("Team is full, remove Pokemon first", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
