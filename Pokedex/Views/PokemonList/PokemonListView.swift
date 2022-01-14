@@ -14,6 +14,7 @@ struct PokemonListView: View {
     
     @State private var showingAlert = false
     @State private var searchText = ""
+    @State private var sorting: PokemonListSorting = .numeric
     
     @FetchRequest(
       sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
@@ -37,12 +38,22 @@ struct PokemonListView: View {
                 }
             }
         }
+        .toolbar {
+            Button(action: {
+                sorting.toggle()
+                pokemon.sortDescriptors = sorting == .numeric
+                    ? [SortDescriptor(\Pokemon.id)]
+                    : [SortDescriptor(\Pokemon.name)]
+            }) {
+                Image(systemName: sorting.imageSystemName)
+            }
+        }
         .refreshable {
             controller.loadPokemon()
         }
 //        .searchable(text: $searchText) {
 //            ForEach(pokemonNames, id: \.self) { pokemonName in
-//                    Text(pokemonName).searchCompletion(pokemonName)
+//                Text(pokemonName).searchCompletion(pokemonName)
 //            }
 //        }
         .searchable(text: $searchText)
@@ -64,3 +75,20 @@ struct PokemonListView: View {
 //            .environmentObject(PokedexAPI(api: PokeAPI(), context: PersistenceController.shared.container.viewContext))
 //    }
 //}
+
+enum PokemonListSorting: Int {
+    case numeric
+    case alphabetical
+    
+    mutating func toggle() {
+        self = self == .numeric ? .alphabetical : .numeric
+    }
+    var imageSystemName: String {
+        switch self {
+        case .numeric:
+            return "list.number"
+        case .alphabetical:
+            return "textformat"
+        }
+    }
+}

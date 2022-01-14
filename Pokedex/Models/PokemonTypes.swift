@@ -66,7 +66,7 @@ extension PokemonTypes {
         case .poison:
             image = Image("Poison")
         case .psychic:
-            image = Image("Pyschic")
+            image = Image("Psychic")
         case .rock:
             image = Image("Rock")
         case .steel:
