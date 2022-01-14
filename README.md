@@ -23,3 +23,12 @@ Seems to be a simple debug / diagnostic left by a dev. https://www.hackingwithsw
 Writing analzed variants.
 ```
 Seems to be log noise https://developers.apple.com/forums/thread/689066
+
+## TODO
+* replace username + password login
+  * code creation at first startup
+  * store code in keychain -> create keychain wrappedObject similar to AppStorage()
+
+* PokemonListView
+  * add searchbar
+  * make it sortable by id or name -> toggle between those top on top right?
