@@ -16,4 +16,7 @@ enum UserDefaultsKeys: String {
     case gym6
     case gym7
     case gym8
+    
+    case code
+    case inSetup
 }

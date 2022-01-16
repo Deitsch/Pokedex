@@ -16,3 +16,12 @@ extension String {
       self = self.capitalizingFirstLetter()
     }
 }
+
+extension String {
+    func charAt(_ characterIndex: Int) -> String {
+        if characterIndex >= self.count {
+            return ""
+        }
+        return String(self[index(startIndex, offsetBy: characterIndex)])
+    }
+}

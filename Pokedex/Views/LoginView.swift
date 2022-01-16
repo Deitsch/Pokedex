@@ -12,12 +12,14 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State private var username = ""
-    @State private var password = ""
+    @State private var enteredCode = ""
     @State private var openPokedex = false
+    @State private var showingAlert = false
     @Binding var isLoggedIn: Bool
+    @AppStorage(UserDefaultsKeys.code.rawValue) var code = ""
+    @AppStorage(UserDefaultsKeys.inSetup.rawValue) var inSetup = true
     
-    let screenHeight: CGFloat = 320
+    let screenHeight: CGFloat = 280
     let padding: CGFloat = 20
     let bottomExtraSpace: CGFloat = 20
 
@@ -39,14 +41,9 @@ struct LoginView: View {
                         .overlay(alignment: .center) {
                             VStack {
                                 HStack {
-                                    Text("Username").foregroundColor(.red)
-                                    TextField("", text: $username)
-                                        .borderBottom()
-                                        .foregroundColor(.red)
-                                }
-                                HStack {
-                                    Text("Password").foregroundColor(.red)
-                                    TextField("", text: $password)
+                                    Text("Code").foregroundColor(.red)
+                                    TextField("", text: $enteredCode)
+                                        .keyboardType(.numberPad)
                                         .borderBottom()
                                         .foregroundColor(.red)
                                 }
@@ -90,8 +87,13 @@ struct LoginView: View {
                 }
                 HStack() {
                     Button(action: {
-                        withAnimation(.linear(duration: 0.5)) {
-                            isLoggedIn = true
+                        if enteredCode == code {
+                            withAnimation(.linear(duration: 0.5)) {
+                                isLoggedIn = true
+                            }
+                        }
+                        else {
+                            showingAlert = true
                         }
                     }) {
                     Image(systemName: "arrow.right.circle.fill")
@@ -141,6 +143,12 @@ struct LoginView: View {
                             .zIndex(7)
                     }
             }
+        }
+        .fullScreenCover(isPresented: $inSetup) {
+            SetupView(inSetup: $inSetup)
+        }
+        .alert("Code was wrong", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
         }
         .background(Color.pokemonRed)
     }
