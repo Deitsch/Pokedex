@@ -16,7 +16,6 @@ struct CodeInput: View {
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
             .frame(width: 64, height: 64)
-            .background(Color("white"))
             .cornerRadius(3)
             .overlay(
                 RoundedRectangle(cornerRadius: 3)

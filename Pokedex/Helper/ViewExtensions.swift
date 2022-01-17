@@ -27,7 +27,7 @@ extension View {
 // 8bit font wrapper
 extension View {
     func font8bit(size: CGFloat, bold: Bool = false) -> some View {
-        font(.custom(bold ? "ConnectionBold" :"Connection", size: size))
+        font(.custom(bold ? "ConnectionBold" : "Connection", size: size))
     }
 }
 
