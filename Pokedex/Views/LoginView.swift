@@ -22,7 +22,7 @@ struct LoginView: View {
     let screenHeight: CGFloat = 280
     let padding: CGFloat = 20
     let bottomExtraSpace: CGFloat = 20
-
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -156,6 +156,11 @@ struct LoginView: View {
             Button("OK", role: .cancel) { }
         }
         .background(Color.pokemonRed)
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                toggleOpenPokedex()
+            }
+        }
     }
     
     func toggleOpenPokedex() {
