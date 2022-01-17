@@ -59,7 +59,7 @@ struct SetupView: View {
                     }
             }
             .padding(.bottom, 20)
-            Text("Setup a code to unluck your Pokedex in the future").font8bit(size: 16)
+            Text("Set up a code to unluck your Pokedex in the future").font8bit(size: 16)
             Spacer()
         }
         .background(Color.pokemonRed)
