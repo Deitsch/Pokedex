@@ -20,7 +20,9 @@ struct MainView: View {
                         .navigationTitle("Trainer") // is the same as .navigationBarTitle("Trainer")
                         .toolbar {
                             Button("Lock") {
-                                isLoggedIn.toggle()
+                                withAnimation(.linear(duration: 0.5)) {
+                                    isLoggedIn.toggle()
+                                }
                             }
                         }
                 }
