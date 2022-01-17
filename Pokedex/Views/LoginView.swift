@@ -16,6 +16,7 @@ struct LoginView: View {
     @State private var openPokedex = false
     @State private var showingAlert = false
     @Binding var isLoggedIn: Bool
+    @Binding var hasAppeared: Bool
     @AppStorage(UserDefaultsKeys.code.rawValue) var code = ""
     @AppStorage(UserDefaultsKeys.inSetup.rawValue) var inSetup = true
     
@@ -157,8 +158,11 @@ struct LoginView: View {
         }
         .background(Color.pokemonRed)
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                toggleOpenPokedex()
+            if !hasAppeared {
+                hasAppeared = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    toggleOpenPokedex()
+                }
             }
         }
     }
@@ -172,6 +176,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isLoggedIn: .constant(false))
+        LoginView(isLoggedIn: .constant(false), hasAppeared: .constant(true))
     }
 }

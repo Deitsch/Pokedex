@@ -14,12 +14,13 @@ struct PokedexApp: App {
     let pokedexAPI = PokeAPIController(api: PokeAPIco(), container: PersistenceController.shared.container)
     
     @State var isLoggedIn = false
+    @State var appHasAppeared = false
 
     var body: some Scene {
         WindowGroup {
             ZStack {
                 if !isLoggedIn {
-                    LoginView(isLoggedIn: $isLoggedIn)
+                    LoginView(isLoggedIn: $isLoggedIn, hasAppeared: $appHasAppeared)
                         .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
                 }
                 if isLoggedIn {
